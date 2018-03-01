@@ -38,16 +38,16 @@ def pick_terms(glossary, picked):
 
 def output_results(terms):
     folder = os.path.join(os.path.expanduser('~'), 'Documents/beerblog/newsletter')
-    my_date = '{:%Y-%m-%d %H:%M}'.format(datetime.now())
+    my_date = '{:%Y-%m-%d}'.format(datetime.now())
     with open(f'{folder}/glossary_items_{my_date}.txt', 'w') as f:
         for t in terms:
-            f.write(f'{t}\n\n')
+            f.write(f'**{t[1]}** - {t[2]}\n\n')
 
 
 def store_picked(picked):
     with open('gp.txt', 'w') as f:
         for p in picked:
-            f.write(p)
+            f.write(f'{p}\n')
 
 
 def main():
