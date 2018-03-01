@@ -103,3 +103,5 @@ ENV/
 #gubbins
 .DS_Store
 .idea
+gp.txt
+
