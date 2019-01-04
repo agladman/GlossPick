@@ -13,7 +13,8 @@ import os
 
 def load_picked():
     with open('gp.txt', 'r') as f:
-        return [x for x in f.readlines()]
+        raw = f.readlines()
+        return [r.strip('\n') for r in raw]
 
 
 def load_glossary():
@@ -47,16 +48,19 @@ def output_results(terms):
 def store_picked(picked):
     with open('gp.txt', 'w') as f:
         for p in picked:
-            f.write(f'{p}\n')
+            if p is not '':
+                f.write(p + '\n')
 
 
 def main():
     picked = load_picked()
     glossary = load_glossary()
     terms, new_picked = pick_terms(glossary, picked)
-    output_results(terms)
+    # output_results(terms)
     store_picked(new_picked)
-    print(f'Operation complete. Terms chosen: {terms[0][1]} | {terms[1][1]}')
+    print(f'''\nOperation complete. Terms chosen:
+            \n\t{terms[0][1]} - {terms[0][2]}
+            \n\t{terms[1][1]} - {terms[1][2]}\n''')
 
 
 if __name__ == "__main__":
