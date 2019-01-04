@@ -11,15 +11,20 @@ import random
 import os
 
 
+BASEDIR = os.path.dirname(os.path.abspath(__file__))
+LOGFILE = os.path.join(BASEDIR, 'gp.txt')
+CSVFILE = os.path.join(BASEDIR, 'beerglossary.csv')
+
+
 def load_picked():
-    with open('gp.txt', 'r') as f:
+    with open(LOGFILE, 'r') as f:
         raw = f.readlines()
         return [r.strip('\n') for r in raw]
 
 
 def load_glossary():
     glossary = []
-    with open('beerglossary.csv', newline='') as csvfile:
+    with open(CSVFILE, newline='') as csvfile:
         mr_wonky = csv.reader(csvfile, dialect='excel')
         for row in mr_wonky:
             gloss = (row[0], row[1], row[2])
@@ -46,7 +51,7 @@ def output_results(terms):
 
 
 def store_picked(picked):
-    with open('gp.txt', 'w') as f:
+    with open(LOGFILE, 'w') as f:
         for p in picked:
             if p is not '':
                 f.write(p + '\n')
